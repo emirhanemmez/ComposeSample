@@ -7,13 +7,10 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.emirhanemmez.common.presentation.component.EmptyMessage
 import com.emirhanemmez.common.presentation.component.ErrorDialog
 import com.emirhanemmez.common.presentation.component.ProgressDialog
@@ -27,25 +24,27 @@ import com.emirhanemmez.feature.home.presentation.state.HomeScreenUiState
 
 @Composable
 fun HomeRoute(
+    homeScreenUiState: HomeScreenUiState,
+    homeScreenUiEvent: HomeScreenUiEvent,
     onItemClick: (HomeListItem) -> Unit,
-    viewModel: HomeViewModel = hiltViewModel(),
+    onItemLongClick: (HomeListItem) -> Unit,
+    onTextChanged: (String) -> Unit
 ) {
-    val homeScreenUiState by viewModel.homeScreenUiState.collectAsStateWithLifecycle()
-    val homeScreenUiEvent by viewModel.homeScreenUiEvent.collectAsStateWithLifecycle()
+
     val snackbarHostState = remember {
         SnackbarHostState()
     }
 
-    Template(topBar = {
-        SearchBox(onTextChanged = { searchText ->
-            viewModel.getList(0, searchText)
-        })
-    }) {
+    Template(
+        topBar = {
+            SearchBox(
+                onTextChanged = { onTextChanged(it) }
+            )
+        }
+    ) {
         HomeScreen(
             onItemClick = onItemClick,
-            onItemLongClick = { listItemEntity ->
-                viewModel.addToFavourites(listItemEntity)
-            },
+            onItemLongClick = { onItemLongClick(it) },
             homeScreenUiState = homeScreenUiState,
             homeScreenUiEvent = homeScreenUiEvent,
             snackbarHostState = snackbarHostState
