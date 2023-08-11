@@ -1,5 +1,20 @@
 # ComposeSample
-Multi Module Clean Architecture Compose sample app
+Multi Module Clean Architecture Compose sample app.
+
+Technologies:
+- Multi Module Architecture
+- Jetpack Compose
+- K2 Compiler
+- Kotlin 1.9.0
+- AGP 8.2.0-alpha15
+- Version Catalog
+- Ktor Client
+- Hilt
+- Jetpack Navigation
+- Mockk
+- Faking
+- ViewModel test (upcoming)
+- Navigation test (upcoming)
 
 For run:
 1. Run this repo for backend https://github.com/emirhanemmez/BackendForMyComposeApp
