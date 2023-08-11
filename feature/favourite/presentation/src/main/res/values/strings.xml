@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="get_favourites_error">Get favourites error message</string>
+    <string name="delete_favourite_error">Delete favourite error message</string>
+    <string name="no_favourite">No favourite item</string>
+    <string name="delete_favourite_success">Successfully deleted!</string>
+</resources>
