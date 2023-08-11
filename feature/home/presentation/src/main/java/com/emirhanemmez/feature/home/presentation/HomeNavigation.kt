@@ -8,7 +8,7 @@ object HomeNavigation {
     const val route = "home"
 }
 
-fun NavGraphBuilder.homeScreen(onDetailNavigation: (HomeListItem) -> Unit) {
+fun NavGraphBuilder.homeRoute(onDetailNavigation: (HomeListItem) -> Unit) {
     composable(HomeNavigation.route) {
         HomeRoute(
             onItemClick = {

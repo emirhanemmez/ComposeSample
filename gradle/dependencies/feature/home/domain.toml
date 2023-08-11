@@ -10,5 +10,5 @@ inject = "1"
 coroutines = "1.7.3"
 # runTest not working with higher versions
 coroutines-test = "1.6.4"
-mockk = "1.12.3"
+mockk = "1.13.5"
 junit4 = "4.13.2"

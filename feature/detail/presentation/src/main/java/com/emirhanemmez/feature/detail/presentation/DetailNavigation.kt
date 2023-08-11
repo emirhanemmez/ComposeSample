@@ -12,18 +12,19 @@ object DetailNavigation {
     const val detailEntityArg = "detailEntityArg"
 }
 
-fun NavGraphBuilder.detailScreen() =
+fun NavGraphBuilder.detailRoute() =
     composable(
         route = DetailNavigation.route,
-        arguments = listOf(navArgument(DetailNavigation.detailEntityArg) {
-            type = NavType.ParcelableType(DetailItem::class.java)
-        })
+        arguments = listOf(
+            navArgument(DetailNavigation.detailEntityArg) {
+                type = NavType.ParcelableType(DetailItem::class.java)
+            }
+        )
     ) {
         it.arguments?.getSafeParcelable(
             DetailNavigation.detailEntityArg,
             DetailItem::class.java
-        )
-            ?.let { detailEntityArg ->
-                DetailScreen(detailItem = detailEntityArg)
-            }
+        )?.let { detailEntityArg ->
+            DetailScreen(detailItem = detailEntityArg)
+        }
     }

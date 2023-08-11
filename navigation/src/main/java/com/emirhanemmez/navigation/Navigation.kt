@@ -5,11 +5,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.emirhanemmez.feature.detail.presentation.DetailNavigation
-import com.emirhanemmez.feature.detail.presentation.detailScreen
-import com.emirhanemmez.feature.favourite.presentation.favouriteScreen
+import com.emirhanemmez.feature.detail.presentation.detailRoute
+import com.emirhanemmez.feature.favourite.presentation.favouriteRoute
 import com.emirhanemmez.feature.home.presentation.HomeNavigation
-import com.emirhanemmez.feature.home.presentation.homeScreen
-import com.emirhanemmez.navigation.mapper.toDetailEntity
+import com.emirhanemmez.feature.home.presentation.homeRoute
+import com.emirhanemmez.navigation.mapper.toDetailItem
 
 @Composable
 fun Navigation(
@@ -20,18 +20,20 @@ fun Navigation(
         navController = navController,
         startDestination = HomeNavigation.route
     ) {
-        homeScreen(
+        homeRoute(
             onDetailNavigation = { homeListItem ->
-                val detailEntityArg = viewModel.getParcelableString(homeListItem.toDetailEntity())
+                val detailEntityArg = viewModel.getParcelableString(homeListItem.toDetailItem())
                 navController.navigate("${DetailNavigation.route}/$detailEntityArg")
             }
         )
-        favouriteScreen(
+        favouriteRoute(
             onDetailNavigation = { favouriteItem ->
-                val detailEntityArg = viewModel.getParcelableString(favouriteItem.toDetailEntity())
+                val detailEntityArg = viewModel.getParcelableString(favouriteItem.toDetailItem())
                 navController.navigate("${DetailNavigation.route}/$detailEntityArg")
             }
         )
-        detailScreen()
+        detailRoute(
+
+        )
     }
 }

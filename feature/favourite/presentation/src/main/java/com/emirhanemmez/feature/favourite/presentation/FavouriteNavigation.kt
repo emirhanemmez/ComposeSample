@@ -9,7 +9,7 @@ object FavouriteNavigation {
     const val route = "favourite"
 }
 
-fun NavGraphBuilder.favouriteScreen(onDetailNavigation: (FavouriteItem) -> Unit) =
+fun NavGraphBuilder.favouriteRoute(onDetailNavigation: (FavouriteItem) -> Unit) =
     composable(FavouriteNavigation.route) {
         val favouriteViewModel = hiltViewModel<FavouriteViewModel>()
         FavouriteRoute(

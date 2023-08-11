@@ -12,6 +12,4 @@ class NavigationViewModel @Inject constructor(
 ) : ViewModel() {
     fun <T> getParcelableString(parcelableData: T): String =
         Uri.encode(gson.toJson(parcelableData))
-
-    fun gson(): Gson = gson
 }

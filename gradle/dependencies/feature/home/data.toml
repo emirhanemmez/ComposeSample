@@ -16,6 +16,6 @@ ktor = "2.3.3"
 hilt = "2.47"
 # runTest not working with higher versions
 coroutines-test = "1.6.4"
-mockk = "1.12.3"
+mockk = "1.13.5"
 room = "2.5.2"
 kotlin-serialization = "1.5.1"
