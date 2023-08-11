@@ -9,12 +9,12 @@ object FavouriteNavigation {
     const val route = "favourite"
 }
 
-fun NavGraphBuilder.favouriteRoute(onDetailNavigation: (FavouriteItem) -> Unit) =
+fun NavGraphBuilder.favouriteRoute(navigateToDetail: (FavouriteItem) -> Unit) =
     composable(FavouriteNavigation.route) {
         val favouriteViewModel = hiltViewModel<FavouriteViewModel>()
         FavouriteRoute(
             onItemClick = { favouriteItem ->
-                onDetailNavigation.invoke(favouriteItem)
+                navigateToDetail.invoke(favouriteItem)
             },
             viewModel = favouriteViewModel
         )

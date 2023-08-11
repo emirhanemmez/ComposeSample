@@ -8,11 +8,11 @@ object HomeNavigation {
     const val route = "home"
 }
 
-fun NavGraphBuilder.homeRoute(onDetailNavigation: (HomeListItem) -> Unit) {
+fun NavGraphBuilder.homeRoute(navigateToDetail: (HomeListItem) -> Unit) {
     composable(HomeNavigation.route) {
         HomeRoute(
             onItemClick = {
-                onDetailNavigation.invoke(it)
+                navigateToDetail.invoke(it)
             }
         )
     }

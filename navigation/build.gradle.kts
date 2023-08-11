@@ -2,8 +2,6 @@
 plugins {
     alias(appLibs.plugins.androidLibrary)
     alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.hilt)
 }
 
 android {
@@ -47,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common:presentation"))
     implementation(project(":feature:home:domain"))
     implementation(project(":feature:favourite:domain"))
     implementation(project(":feature:detail:domain"))
@@ -54,10 +53,6 @@ dependencies {
     implementation(project(":feature:favourite:presentation"))
     implementation(project(":feature:detail:presentation"))
     implementation(navigationLibs.core.ktx)
-    implementation(navigationLibs.hilt)
-    kapt(navigationLibs.hilt.compiler)
-    implementation(navigationLibs.hilt.navigation)
-    implementation(navigationLibs.gson)
     implementation(navigationLibs.navigation.compose)
     implementation(navigationLibs.compose.bom)
     implementation(navigationLibs.material3)

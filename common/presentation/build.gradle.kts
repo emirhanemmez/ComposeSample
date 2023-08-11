@@ -52,6 +52,8 @@ dependencies {
     implementation(commonPresentationLibs.ui.graphics)
     implementation(commonPresentationLibs.ui.tooling.preview)
     implementation(commonPresentationLibs.material3)
+    implementation(commonPresentationLibs.navigation.common.ktx)
+    implementation(commonPresentationLibs.gson)
     debugImplementation(commonPresentationLibs.ui.tooling)
     debugImplementation(commonPresentationLibs.ui.test.manifest)
     androidTestImplementation(commonPresentationLibs.ui.test.junit4)
