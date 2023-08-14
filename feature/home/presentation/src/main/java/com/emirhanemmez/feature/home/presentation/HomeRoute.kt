@@ -2,6 +2,7 @@ package com.emirhanemmez.feature.home.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -12,12 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.emirhanemmez.common.presentation.component.EmptyMessage
 import com.emirhanemmez.common.presentation.component.ErrorDialog
 import com.emirhanemmez.common.presentation.component.ProgressDialog
-import com.emirhanemmez.feature.home.presentation.component.HomeTag
 import com.emirhanemmez.feature.home.presentation.component.List
 import com.emirhanemmez.feature.home.presentation.component.SearchBox
 import com.emirhanemmez.feature.home.presentation.component.Template
@@ -36,16 +37,37 @@ fun HomeRoute(
         SnackbarHostState()
     }
 
-    Template(topBar = {
-        SearchBox(onTextChanged = { searchText ->
+    HomeScreen(
+        onTextChanged = { searchText ->
             viewModel.getList(0, searchText)
-        })
+        },
+        onItemClick = { homeListItem ->
+            onItemClick.invoke(homeListItem)
+        },
+        onItemLongClick = { homeListItem ->
+            viewModel.addToFavourites(homeListItem)
+        },
+        homeScreenUiState = homeScreenUiState,
+        homeScreenUiEvent = homeScreenUiEvent,
+        snackbarHostState = snackbarHostState
+    )
+}
+
+@Composable
+internal fun HomeScreen(
+    onTextChanged: (String) -> Unit,
+    onItemClick: (HomeListItem) -> Unit,
+    onItemLongClick: (HomeListItem) -> Unit,
+    homeScreenUiState: HomeScreenUiState,
+    homeScreenUiEvent: HomeScreenUiEvent,
+    snackbarHostState: SnackbarHostState
+) {
+    Template(topBar = {
+        SearchBox(onTextChanged = onTextChanged)
     }) {
-        HomeScreen(
+        HomeContent(
             onItemClick = onItemClick,
-            onItemLongClick = { listItemEntity ->
-                viewModel.addToFavourites(listItemEntity)
-            },
+            onItemLongClick = onItemLongClick,
             homeScreenUiState = homeScreenUiState,
             homeScreenUiEvent = homeScreenUiEvent,
             snackbarHostState = snackbarHostState
@@ -54,7 +76,7 @@ fun HomeRoute(
 }
 
 @Composable
-private fun HomeScreen(
+internal fun HomeContent(
     onItemClick: (HomeListItem) -> Unit,
     onItemLongClick: (HomeListItem) -> Unit,
     homeScreenUiState: HomeScreenUiState,
@@ -64,6 +86,9 @@ private fun HomeScreen(
     when (homeScreenUiState) {
         is HomeScreenUiState.Content -> {
             List(
+                modifier = Modifier
+                    .padding(72.dp)
+                    .testTag(HomeTag.list),
                 listItems = homeScreenUiState.list,
                 onItemClick = onItemClick,
                 onItemLongClick = onItemLongClick

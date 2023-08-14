@@ -28,11 +28,12 @@ import com.emirhanemmez.feature.favourite.presentation.data.FavouriteItem
 
 @Composable
 fun List(
+    modifier: Modifier = Modifier,
     listItems: List<FavouriteItem>,
     onItemClick: (FavouriteItem) -> Unit,
     onItemLongClick: (FavouriteItem) -> Unit
 ) {
-    LazyColumn(Modifier.padding(top = 72.dp)) {
+    LazyColumn(modifier) {
         items(listItems) { item ->
             ListItem(listItem = item, onItemClick = onItemClick, onItemLongClick = onItemLongClick)
         }

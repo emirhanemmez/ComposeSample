@@ -43,6 +43,9 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/LICENSE.md"
+            excludes += "/META-INF/LICENSE-notice.md"
+            excludes += "/META-INF/*.kotlin_module"
         }
     }
 }
@@ -70,8 +73,6 @@ dependencies {
     androidTestImplementation(featureHomePresentationLibs.espresso.core)
     androidTestImplementation(platform(featureHomePresentationLibs.compose.bom))
     androidTestImplementation(featureHomePresentationLibs.ui.test.junit4)
-    androidTestImplementation(featureHomePresentationLibs.hilt.android.testing)
-    kaptAndroidTest(featureHomePresentationLibs.hilt.android.compiler)
     debugImplementation(featureHomePresentationLibs.ui.tooling)
     debugImplementation(featureHomePresentationLibs.ui.test.manifest)
 }

@@ -3,10 +3,9 @@ package com.emirhanemmez.feature.home.presentation.mapper
 import com.eemmez.localization.LocalizationManager
 import com.emirhanemmez.feature.home.domain.entity.HomeError
 import com.emirhanemmez.feature.home.presentation.R
-import javax.inject.Inject
 import com.emirhanemmez.common.presentation.R as commonResources
 
-class ErrorMessageMapper @Inject constructor(
+class ErrorMessageMapper(
     private val localizationManager: LocalizationManager
 ) {
     fun getErrorMessage(error: HomeError?): String =

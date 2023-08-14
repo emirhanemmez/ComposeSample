@@ -16,8 +16,6 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", v
 hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
-hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 localizationManager = { group = "com.github.emirhanemmez", name = "localizationmanager", version.ref = "localizationManager" }
@@ -36,3 +34,5 @@ material3 = "1.1.1"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 localizationManager = "1.0"
+coroutines-test = "1.6.4"
+mockk = "1.13.3"

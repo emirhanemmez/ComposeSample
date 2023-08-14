@@ -70,7 +70,7 @@ class FavouriteViewModel @Inject constructor(
                 when (result) {
                     is Result.Success -> {
                         _favouriteScreenUiEvent.value =
-                            FavouriteScreenUiEvent.Success(localizationManager.getString(R.string.delete_favourite_success))
+                            FavouriteScreenUiEvent.DeleteSuccess(localizationManager.getString(R.string.delete_favourite_success))
                         getFavourites()
                     }
 
@@ -80,7 +80,7 @@ class FavouriteViewModel @Inject constructor(
 
                     is Result.Error -> {
                         _favouriteScreenUiEvent.value =
-                            FavouriteScreenUiEvent.Error(errorMessageMapper.getErrorMessage(result.error))
+                            FavouriteScreenUiEvent.DeleteError(errorMessageMapper.getErrorMessage(result.error))
                     }
                 }
             }

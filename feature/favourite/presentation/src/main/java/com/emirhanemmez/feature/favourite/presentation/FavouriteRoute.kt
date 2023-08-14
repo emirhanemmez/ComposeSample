@@ -2,6 +2,7 @@ package com.emirhanemmez.feature.favourite.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -11,6 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.emirhanemmez.common.presentation.component.EmptyMessage
 import com.emirhanemmez.common.presentation.component.ErrorDialog
@@ -43,7 +46,7 @@ fun FavouriteRoute(
 }
 
 @Composable
-fun FavouriteScreen(
+internal fun FavouriteScreen(
     favouriteScreenUiState: FavouriteScreenUiState,
     favouriteScreenUiEvent: FavouriteScreenUiEvent,
     snackbarHostState: SnackbarHostState,
@@ -53,6 +56,9 @@ fun FavouriteScreen(
     when (favouriteScreenUiState) {
         is FavouriteScreenUiState.Content -> {
             List(
+                modifier = Modifier
+                    .padding(top = 72.dp)
+                    .testTag(FavouriteTag.list),
                 listItems = favouriteScreenUiState.list,
                 onItemClick = onItemClick,
                 onItemLongClick = onItemLongClick
@@ -73,7 +79,7 @@ fun FavouriteScreen(
     }
 
     when (favouriteScreenUiEvent) {
-        is FavouriteScreenUiEvent.Success -> {
+        is FavouriteScreenUiEvent.DeleteSuccess -> {
             LaunchedEffect(snackbarHostState) {
                 snackbarHostState.showSnackbar(favouriteScreenUiEvent.successMessage)
             }
@@ -87,7 +93,10 @@ fun FavouriteScreen(
             .fillMaxSize()
             .wrapContentSize(align = Alignment.BottomCenter)
     ) {
-        SnackbarHost(hostState = snackbarHostState)
+        SnackbarHost(
+            modifier = Modifier.testTag(FavouriteTag.snackbar),
+            hostState = snackbarHostState
+        )
     }
 }
 

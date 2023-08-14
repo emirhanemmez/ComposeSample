@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -29,14 +28,13 @@ import com.emirhanemmez.feature.home.presentation.model.HomeListItem
 
 @Composable
 fun List(
+    modifier: Modifier = Modifier,
     listItems: List<HomeListItem>,
     onItemClick: (HomeListItem) -> Unit,
     onItemLongClick: (HomeListItem) -> Unit
 ) {
     LazyColumn(
-        Modifier
-            .padding(top = 72.dp)
-            .testTag(HomeTag.list)
+        modifier
     ) {
         items(listItems) { item ->
             HomeListItem(
@@ -78,16 +76,14 @@ fun HomeListItem(
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .requiredHeight(200.dp)
-                    .testTag(HomeTag.listItemImage),
+                    .requiredHeight(200.dp),
                 contentScale = ContentScale.FillBounds,
                 painter = rememberAsyncImagePainter(homeListItem.imageURL),
                 contentDescription = "Image of the pokemon"
             )
             Text(
                 modifier = Modifier
-                    .padding(0.dp, 10.dp, 0.dp, 0.dp)
-                    .testTag(HomeTag.listItemName),
+                    .padding(0.dp, 10.dp, 0.dp, 0.dp),
                 text = homeListItem.name,
                 style = MaterialTheme.typography.bodyMedium,
                 overflow = TextOverflow.Ellipsis

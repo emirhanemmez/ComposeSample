@@ -2,7 +2,6 @@
 javax-inject = { group = "javax.inject", name = "javax.inject", version.ref = "inject" }
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 
 [versions]
@@ -10,5 +9,4 @@ inject = "1"
 coroutines = "1.7.3"
 # runTest not working with higher versions
 coroutines-test = "1.6.4"
-mockk = "1.13.5"
 junit4 = "4.13.2"

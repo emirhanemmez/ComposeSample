@@ -13,6 +13,5 @@ dependencies {
     implementation(featureHomeDomainLibs.javax.inject)
     implementation(featureHomeDomainLibs.coroutines.core)
     testImplementation(featureHomeDomainLibs.coroutines.test)
-    testImplementation(featureHomeDomainLibs.mockk)
     testImplementation(featureHomeDomainLibs.junit4)
 }

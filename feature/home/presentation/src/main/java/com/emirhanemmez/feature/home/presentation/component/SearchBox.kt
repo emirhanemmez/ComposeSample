@@ -11,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.emirhanemmez.feature.home.presentation.HomeTag
 
 @Composable
 fun SearchBox(modifier: Modifier = Modifier, onTextChanged: (String) -> Unit) {
@@ -20,7 +21,7 @@ fun SearchBox(modifier: Modifier = Modifier, onTextChanged: (String) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .testTag(HomeTag.searchTextField),
+                .testTag(HomeTag.searchBox),
             value = searchValue.value,
             onValueChange = {
                 searchValue.value = it
