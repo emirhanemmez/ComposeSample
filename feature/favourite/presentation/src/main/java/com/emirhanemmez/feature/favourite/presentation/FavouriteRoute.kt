@@ -70,11 +70,17 @@ internal fun FavouriteScreen(
         }
 
         is FavouriteScreenUiState.Error -> {
-            ErrorDialog(errorMessage = favouriteScreenUiState.errorMessage)
+            ErrorDialog(
+                modifier = Modifier.testTag(FavouriteTag.errorDialog),
+                errorMessage = favouriteScreenUiState.errorMessage
+            )
         }
 
         is FavouriteScreenUiState.Empty -> {
-            EmptyMessage(message = favouriteScreenUiState.emptyMessage)
+            EmptyMessage(
+                modifier = Modifier.testTag(FavouriteTag.emptyMessage),
+                message = favouriteScreenUiState.emptyMessage
+            )
         }
     }
 

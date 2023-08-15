@@ -100,11 +100,17 @@ internal fun HomeContent(
         }
 
         is HomeScreenUiState.Error -> {
-            ErrorDialog(errorMessage = homeScreenUiState.errorMessage)
+            ErrorDialog(
+                modifier = Modifier.testTag(HomeTag.errorDialog),
+                errorMessage = homeScreenUiState.errorMessage
+            )
         }
 
         is HomeScreenUiState.Empty -> {
-            EmptyMessage(message = homeScreenUiState.emptyMessage)
+            EmptyMessage(
+                modifier = Modifier.testTag(HomeTag.emptyMessage),
+                message = homeScreenUiState.emptyMessage
+            )
         }
     }
 

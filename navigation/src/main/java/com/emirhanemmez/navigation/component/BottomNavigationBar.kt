@@ -14,26 +14,31 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.emirhanemmez.navigation.Navigation
+import com.emirhanemmez.navigation.NavigationTag
+import com.emirhanemmez.navigation.model.BottomNavItem
 
 @Composable
-fun BottomNavigationBar() {
+fun BottomNavigationBar(navController: NavHostController = rememberNavController()) {
     val screens = listOf(
         BottomNavItem(
             name = "Home",
             route = "home",
-            icon = Icons.Rounded.Home
+            icon = Icons.Rounded.Home,
+            tag = NavigationTag.homeItem
         ),
         BottomNavItem(
             name = "Favourite",
             route = "favourite",
-            icon = Icons.Rounded.Star
+            icon = Icons.Rounded.Star,
+            tag = NavigationTag.favouriteItem
         )
     )
-    val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     Scaffold(
@@ -43,6 +48,7 @@ fun BottomNavigationBar() {
             ) {
                 screens.forEach {
                     NavigationBarItem(
+                        modifier = Modifier.testTag(it.tag),
                         selected = it.route == navBackStackEntry?.destination?.route,
                         onClick = { navController.navigate(it.route) },
                         label = {
