@@ -1,21 +1,21 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(appLibs.plugins.androidApplication)
-    alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.hilt)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.emirhanemmez.composesample"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.emirhanemmez.composesample"
-        minSdk = appLibs.versions.minSdk.get().toInt()
-        targetSdk = appLibs.versions.targetSdk.get().toInt()
-        versionCode = appLibs.versions.versionCode.get().toInt()
-        versionName = appLibs.versions.versionName.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = appLibs.versions.kotlin.compiler.extension.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.get()
     }
     packaging {
         resources {
@@ -66,21 +66,21 @@ dependencies {
     implementation(project(":feature:favourite:data"))
     implementation(project(":feature:favourite:domain"))
     implementation(project(":feature:favourite:presentation"))
-    implementation(appLibs.core.ktx)
-    implementation(appLibs.lifecycle.runtime.ktx)
-    implementation(appLibs.hilt)
-    kapt(appLibs.hilt.compiler)
-    implementation(appLibs.activity.compose)
-    implementation(platform(appLibs.compose.bom))
-    implementation(appLibs.ui)
-    implementation(appLibs.ui.graphics)
-    implementation(appLibs.ui.tooling.preview)
-    implementation(appLibs.material3)
-    testImplementation(appLibs.junit)
-    androidTestImplementation(appLibs.androidx.test.ext.junit)
-    androidTestImplementation(appLibs.espresso.core)
-    androidTestImplementation(platform(appLibs.compose.bom))
-    androidTestImplementation(appLibs.ui.test.junit4)
-    debugImplementation(appLibs.ui.tooling)
-    debugImplementation(appLibs.ui.test.manifest)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
 }

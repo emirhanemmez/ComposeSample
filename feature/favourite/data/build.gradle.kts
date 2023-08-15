@@ -1,19 +1,19 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.kotlin.serialization)
-    alias(appLibs.plugins.ksp)
-    alias(appLibs.plugins.hilt)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.emirhanemmez.feature.favourite.data"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -41,15 +41,15 @@ dependencies {
     implementation(project(":common:data:local"))
     implementation(project(":common:domain"))
     implementation(project(":feature:favourite:domain"))
-    implementation(featureFavouriteDataLibs.core.ktx)
-    implementation(featureFavouriteDataLibs.kotlin.serialization)
-    implementation(featureFavouriteDataLibs.hilt)
-    kapt(featureFavouriteDataLibs.hilt.compiler)
-    runtimeOnly(featureFavouriteDataLibs.room.runtime)
-    ksp(featureFavouriteDataLibs.room.compiler)
-    implementation(featureFavouriteDataLibs.room.ktx)
+    implementation(libs.core.ktx)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    runtimeOnly(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
 
-    testImplementation(appLibs.junit)
-    androidTestImplementation(appLibs.androidx.test.ext.junit)
-    androidTestImplementation(appLibs.espresso.core)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

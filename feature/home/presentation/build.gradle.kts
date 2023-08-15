@@ -1,18 +1,18 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.kotlin.parcelize)
-    alias(appLibs.plugins.hilt)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.emirhanemmez.feature.home.presentation"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -38,7 +38,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = appLibs.versions.kotlin.compiler.extension.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.get()
     }
     packaging {
         resources {
@@ -54,25 +54,25 @@ dependencies {
     implementation(project(":common:domain"))
     implementation(project(":common:presentation"))
     implementation(project(":feature:home:domain"))
-    implementation(featureHomePresentationLibs.core.ktx)
-    implementation(featureHomePresentationLibs.lifecycle.runtime.ktx)
-    implementation(featureHomePresentationLibs.lifecycle.runtime.compose)
-    implementation(featureHomePresentationLibs.activity.compose)
-    implementation(platform(featureHomePresentationLibs.compose.bom))
-    implementation(featureHomePresentationLibs.navigation.compose)
-    implementation(featureHomePresentationLibs.hilt)
-    kapt(featureHomePresentationLibs.hilt.compiler)
-    implementation(featureHomePresentationLibs.hilt.navigation)
-    implementation(featureHomePresentationLibs.localizationManager)
-    implementation(featureHomePresentationLibs.coil)
-    implementation(featureHomePresentationLibs.ui)
-    implementation(featureHomePresentationLibs.ui.graphics)
-    implementation(featureHomePresentationLibs.ui.tooling.preview)
-    implementation(featureHomePresentationLibs.material3)
-    androidTestImplementation(featureHomePresentationLibs.androidx.test.ext.junit)
-    androidTestImplementation(featureHomePresentationLibs.espresso.core)
-    androidTestImplementation(platform(featureHomePresentationLibs.compose.bom))
-    androidTestImplementation(featureHomePresentationLibs.ui.test.junit4)
-    debugImplementation(featureHomePresentationLibs.ui.tooling)
-    debugImplementation(featureHomePresentationLibs.ui.test.manifest)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.navigation.compose)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation)
+    implementation(libs.localizationManager)
+    implementation(libs.coil)
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(platform(libs.compose.bom))
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
 }

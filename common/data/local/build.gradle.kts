@@ -1,18 +1,18 @@
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.kotlin.serialization)
-    alias(appLibs.plugins.hilt)
-    alias(appLibs.plugins.ksp)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.emirhanemmez.common.data.local"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -37,15 +37,15 @@ android {
 }
 
 dependencies {
-    implementation(commonDataLocalLibs.core.ktx)
-    implementation(commonDataLocalLibs.kotlin.serialization)
-    implementation(commonDataLocalLibs.hilt)
-    kapt(commonDataLocalLibs.hilt.compiler)
-    runtimeOnly(commonDataLocalLibs.room.runtime)
-    ksp(commonDataLocalLibs.room.compiler)
-    implementation(commonDataLocalLibs.room.ktx)
-    androidTestImplementation(commonDataLocalLibs.room.testing)
-    androidTestImplementation(commonDataLocalLibs.androidx.test.ext.junit)
-    androidTestImplementation(commonDataLocalLibs.coroutines.test)
-    androidTestImplementation(commonDataLocalLibs.test.runner)
+    implementation(libs.core.ktx)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    runtimeOnly(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    androidTestImplementation(libs.room.testing)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.coroutines.test)
+    androidTestImplementation(libs.test.runner)
 }

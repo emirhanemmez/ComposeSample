@@ -1,17 +1,17 @@
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
-    alias(appLibs.plugins.kotlin.kapt)
-    alias(appLibs.plugins.kotlin.serialization)
-    alias(appLibs.plugins.hilt)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.emirhanemmez.common.data.remote"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,9 +36,9 @@ android {
 }
 
 dependencies {
-    implementation(commonDataRemoteLibs.core.ktx)
-    implementation(commonDataRemoteLibs.bundles.ktor)
-    implementation(commonDataRemoteLibs.kotlin.serialization)
-    implementation(commonDataRemoteLibs.hilt)
-    kapt(commonDataRemoteLibs.hilt.compiler)
+    implementation(libs.core.ktx)
+    implementation(libs.bundles.ktor)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
 }

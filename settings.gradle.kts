@@ -14,18 +14,7 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
     }
     versionCatalogs {
-        create("appLibs") { from(files("gradle/dependencies/app.toml")) }
-        create("commonDataRemoteLibs") { from(files("gradle/dependencies/common/data/remote.toml")) }
-        create("commonDataLocalLibs") { from(files("gradle/dependencies/common/data/local.toml")) }
-        create("commonPresentationLibs") { from(files("gradle/dependencies/common/presentation.toml")) }
-        create("navigationLibs") { from(files("gradle/dependencies/navigation.toml")) }
-        create("featureHomeDataLibs") { from(files("gradle/dependencies/feature/home/data.toml")) }
-        create("featureHomeDomainLibs") { from(files("gradle/dependencies/feature/home/domain.toml")) }
-        create("featureHomePresentationLibs") { from(files("gradle/dependencies/feature/home/presentation.toml")) }
-        create("featureFavouriteDataLibs") { from(files("gradle/dependencies/feature/favourite/data.toml")) }
-        create("featureFavouriteDomainLibs") { from(files("gradle/dependencies/feature/favourite/domain.toml")) }
-        create("featureFavouritePresentationLibs") { from(files("gradle/dependencies/feature/favourite/presentation.toml")) }
-        create("featureDetailPresentationLibs") { from(files("gradle/dependencies/feature/detail/presentation.toml")) }
+        create("libs") { from(files("gradle/dependencies/app.toml")) }
     }
 }
 

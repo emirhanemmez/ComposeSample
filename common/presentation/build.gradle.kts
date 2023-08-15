@@ -1,15 +1,15 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.emirhanemmez.common.presentation"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = appLibs.versions.kotlin.compiler.extension.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.get()
     }
     packaging {
         resources {
@@ -45,18 +45,18 @@ android {
 }
 
 dependencies {
-    implementation(commonPresentationLibs.core.ktx)
-    implementation(commonPresentationLibs.lifecycle.runtime.ktx)
-    implementation(platform(commonPresentationLibs.compose.bom))
-    implementation(commonPresentationLibs.ui)
-    implementation(commonPresentationLibs.ui.graphics)
-    implementation(commonPresentationLibs.ui.tooling.preview)
-    implementation(commonPresentationLibs.material3)
-    implementation(commonPresentationLibs.navigation.common.ktx)
-    implementation(commonPresentationLibs.gson)
-    debugImplementation(commonPresentationLibs.ui.tooling)
-    debugImplementation(commonPresentationLibs.ui.test.manifest)
-    androidTestImplementation(commonPresentationLibs.ui.test.junit4)
-    androidTestImplementation(commonPresentationLibs.androidx.test.ext.junit)
-    androidTestImplementation(commonPresentationLibs.espresso.core)
+    implementation(libs.core.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
+    implementation(libs.navigation.common.ktx)
+    implementation(libs.gson)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

@@ -1,15 +1,15 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(appLibs.plugins.androidLibrary)
-    alias(appLibs.plugins.kotlin.android)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.emirhanemmez.navigation"
-    compileSdk = appLibs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = appLibs.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = appLibs.versions.kotlin.compiler.extension.get()
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.extension.get()
     }
     packaging {
         resources {
@@ -52,17 +52,17 @@ dependencies {
     implementation(project(":feature:home:presentation"))
     implementation(project(":feature:favourite:presentation"))
     implementation(project(":feature:detail:presentation"))
-    implementation(navigationLibs.core.ktx)
-    implementation(navigationLibs.navigation.compose)
-    implementation(navigationLibs.compose.bom)
-    implementation(navigationLibs.material3)
-    implementation(navigationLibs.ui)
-    implementation(navigationLibs.ui.graphics)
-    implementation(navigationLibs.ui.tooling.preview)
-    implementation(appLibs.appcompat)
-    implementation(appLibs.material)
-    testImplementation(appLibs.junit)
-    androidTestImplementation(appLibs.androidx.test.ext.junit)
-    androidTestImplementation(appLibs.espresso.core)
-    debugImplementation(navigationLibs.ui.tooling)
+    implementation(libs.core.ktx)
+    implementation(libs.navigation.compose)
+    implementation(libs.compose.bom)
+    implementation(libs.material3)
+    implementation(libs.ui)
+    implementation(libs.ui.graphics)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+    debugImplementation(libs.ui.tooling)
 }

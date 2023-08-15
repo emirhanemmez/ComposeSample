@@ -1,7 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("java-library")
-    alias(appLibs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
@@ -10,8 +10,8 @@ java {
 }
 dependencies {
     implementation(project(":common:domain"))
-    implementation(featureHomeDomainLibs.javax.inject)
-    implementation(featureHomeDomainLibs.coroutines.core)
-    testImplementation(featureHomeDomainLibs.coroutines.test)
-    testImplementation(featureHomeDomainLibs.junit4)
+    implementation(libs.javax.inject)
+    implementation(libs.coroutines.core)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.junit4)
 }
