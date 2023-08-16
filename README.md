@@ -12,9 +12,9 @@ Technologies:
 - Hilt
 - Jetpack Navigation
 - Mockk
-- Faking
-- ViewModel test (upcoming)
-- Navigation test (upcoming)
+- Fake
+- Room Dao test
+- Navigation scenario test
 
 For run:
 1. Run this repo for backend https://github.com/emirhanemmez/BackendForMyComposeApp
