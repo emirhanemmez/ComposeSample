@@ -46,9 +46,6 @@ android {
 
 dependencies {
     implementation(project(":common:presentation"))
-    implementation(project(":feature:home:domain"))
-    implementation(project(":feature:favourite:domain"))
-    implementation(project(":feature:detail:domain"))
     implementation(project(":feature:home:presentation"))
     implementation(project(":feature:favourite:presentation"))
     implementation(project(":feature:detail:presentation"))
