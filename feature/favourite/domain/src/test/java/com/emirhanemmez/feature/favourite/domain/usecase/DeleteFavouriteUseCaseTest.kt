@@ -1,6 +1,6 @@
 package com.emirhanemmez.feature.favourite.domain.usecase
 
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.favourite.domain.entity.FavouriteItemEntity
 import com.emirhanemmez.feature.favourite.domain.repository.FakeFavouriteRepository
 import kotlinx.coroutines.flow.first

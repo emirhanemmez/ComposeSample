@@ -3,7 +3,6 @@ package com.emirhanemmez.composesample
 import androidx.activity.compose.setContent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -12,8 +11,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.emirhanemmez.feature.detail.presentation.DetailNavigation
-import com.emirhanemmez.feature.favourite.presentation.FavouriteNavigation
-import com.emirhanemmez.navigation.Navigation
 import com.emirhanemmez.navigation.NavigationTag
 import com.emirhanemmez.navigation.component.BottomNavigationBar
 import dagger.hilt.android.testing.HiltAndroidRule

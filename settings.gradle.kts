@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -13,23 +14,19 @@ dependencyResolutionManagement {
         mavenCentral()
         maven(url = "https://jitpack.io")
     }
-    versionCatalogs {
-        create("libs") { from(files("gradle/dependencies/app.toml")) }
-    }
 }
 
 rootProject.name = "ComposeSample"
 include(":app")
-include(":common:domain")
-include(":common:presentation")
-include(":feature:home:domain")
-include(":feature:home:presentation")
-include(":feature:detail:presentation")
-include(":feature:favourite:domain")
-include(":feature:favourite:presentation")
-include(":feature:home:data")
-include(":feature:favourite:data")
-include(":feature:detail:domain")
+include(":core")
 include(":navigation")
 include(":common:data:remote")
 include(":common:data:local")
+include(":common:presentation")
+include(":feature:home:data")
+include(":feature:home:domain")
+include(":feature:home:presentation")
+include(":feature:detail:presentation")
+include(":feature:favourite:data")
+include(":feature:favourite:domain")
+include(":feature:favourite:presentation")

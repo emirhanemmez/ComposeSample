@@ -1,10 +1,5 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    id("common.data.local")
 }
 
 android {
@@ -27,25 +22,4 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-}
-
-dependencies {
-    implementation(libs.core.ktx)
-    implementation(libs.kotlin.serialization)
-    implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
-    runtimeOnly(libs.room.runtime)
-    ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
-    androidTestImplementation(libs.room.testing)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.coroutines.test)
-    androidTestImplementation(libs.test.runner)
 }

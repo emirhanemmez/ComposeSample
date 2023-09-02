@@ -1,6 +1,6 @@
 package com.emirhanemmez.feature.home.domain.repository
 
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.home.domain.entity.GetListResponseEntity
 import com.emirhanemmez.feature.home.domain.entity.HomeError
 import com.emirhanemmez.feature.home.domain.entity.ListItemEntity
@@ -25,8 +25,8 @@ class FakeHomeRepository : HomeRepository {
     override fun getList(
         pageNumber: Int?,
         search: String?
-    ): Flow<Result<GetListResponseEntity, HomeError>> =
-        flow<Result<GetListResponseEntity, HomeError>> {
+    ): FlowResult<GetListResponseEntity, HomeError>> =
+        FlowResult<GetListResponseEntity, HomeError>> {
             emit(
                 Result.Success(
                     GetListResponseEntity(
@@ -38,8 +38,8 @@ class FakeHomeRepository : HomeRepository {
             emit(Result.Loading())
         }
 
-    override fun addToFavourites(listItemEntity: ListItemEntity): Flow<Result<Unit, HomeError>> =
-        flow<Result<Unit, HomeError>> {
+    override fun addToFavourites(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError>> =
+        FlowResult<Unit, HomeError>> {
             emit(Result.Success(Unit))
         }.onStart {
             emit(Result.Loading())

@@ -1,10 +1,9 @@
 package com.emirhanemmez.feature.home.domain.usecase
 
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.FlowResult
 import com.emirhanemmez.feature.home.domain.entity.GetListResponseEntity
 import com.emirhanemmez.feature.home.domain.entity.HomeError
 import com.emirhanemmez.feature.home.domain.repository.HomeRepository
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetListUseCase @Inject constructor(
@@ -13,5 +12,5 @@ class GetListUseCase @Inject constructor(
     operator fun invoke(
         pageNumber: Int,
         search: String
-    ): Flow<Result<GetListResponseEntity, HomeError>> = homeRepository.getList(pageNumber, search)
+    ): FlowResult<GetListResponseEntity, HomeError> = homeRepository.getList(pageNumber, search)
 }

@@ -3,7 +3,7 @@ package com.emirhanemmez.feature.home.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eemmez.localization.LocalizationManager
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.home.domain.usecase.AddToFavouritesUseCase
 import com.emirhanemmez.feature.home.domain.usecase.GetListUseCase
 import com.emirhanemmez.feature.home.presentation.mapper.ErrorMessageMapper

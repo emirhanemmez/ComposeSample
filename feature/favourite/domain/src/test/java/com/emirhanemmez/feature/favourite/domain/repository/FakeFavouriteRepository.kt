@@ -1,6 +1,6 @@
 package com.emirhanemmez.feature.favourite.domain.repository
 
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.favourite.domain.entity.FavouriteError
 import com.emirhanemmez.feature.favourite.domain.entity.FavouriteItemEntity
 import kotlinx.coroutines.flow.Flow
@@ -18,12 +18,12 @@ class FakeFavouriteRepository : FavouriteRepository {
         FavouriteItemEntity("kedi8", "image8"),
     )
 
-    override fun getAll(): Flow<Result<List<FavouriteItemEntity>, FavouriteError.GetFavouritesError>> =
+    override fun getAll(): FlowResult<List<FavouriteItemEntity>, FavouriteError.GetFavouritesError>> =
         flow {
             emit(Result.Success(data = favouriteItemEntityList))
         }
 
-    override fun delete(favouriteItemEntity: FavouriteItemEntity): Flow<Result<Unit, FavouriteError.DeleteError>> =
+    override fun delete(favouriteItemEntity: FavouriteItemEntity): FlowResult<Unit, FavouriteError.DeleteError>> =
         flow {
             if (favouriteItemEntityList.remove(favouriteItemEntity)) {
                 emit(Result.Success(Unit))

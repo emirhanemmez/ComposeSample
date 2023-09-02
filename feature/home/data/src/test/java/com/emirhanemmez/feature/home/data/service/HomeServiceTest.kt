@@ -2,7 +2,7 @@ package com.emirhanemmez.feature.home.data.service
 
 import com.emirhanemmez.common.data.remote.dto.Response
 import com.emirhanemmez.common.data.remote.dto.Status
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.home.data.dto.GetListResponse
 import com.emirhanemmez.feature.home.data.dto.HomeErrorCode
 import com.emirhanemmez.feature.home.data.repository.HomeRepositoryImpl

@@ -3,7 +3,7 @@ package com.emirhanemmez.feature.favourite.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eemmez.localization.LocalizationManager
-import com.emirhanemmez.common.domain.Result
+import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.favourite.domain.usecase.DeleteFavouriteUseCase
 import com.emirhanemmez.feature.favourite.domain.usecase.GetFavouritesUseCase
 import com.emirhanemmez.feature.favourite.presentation.data.FavouriteItem
