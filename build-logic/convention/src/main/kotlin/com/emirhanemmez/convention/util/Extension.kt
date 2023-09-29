@@ -28,6 +28,10 @@ internal fun DependencyHandlerDelegate.implementation(dependency: Any) {
     add("implementation", dependency)
 }
 
+internal fun DependencyHandlerDelegate.api(dependency: Any) {
+    add("api", dependency)
+}
+
 internal fun DependencyHandlerDelegate.runtimeOnly(dependency: Any) {
     add("runtimeOnly", dependency)
 }
@@ -50,6 +54,10 @@ internal fun DependencyHandlerDelegate.kaptAndroidTest(dependency: Any) {
 
 internal fun DependencyHandlerDelegate.ksp(dependency: Any) {
     add("ksp", dependency)
+}
+
+internal fun DependencyHandlerDelegate.kspAndroidTest(dependency: Any) {
+    add("kspAndroidTest", dependency)
 }
 
 internal fun DependencyHandlerDelegate.debugImplementation(dependency: Any) {

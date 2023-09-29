@@ -6,9 +6,9 @@ import com.emirhanemmez.feature.home.domain.entity.ListItemEntity
 import com.emirhanemmez.feature.home.domain.repository.HomeRepository
 import javax.inject.Inject
 
-class AddToFavouritesUseCase @Inject constructor(
-    private val homeRepository: HomeRepository,
+class GetFavouritesUseCase @Inject constructor(
+    private val homeRepository: HomeRepository
 ) {
-    operator fun invoke(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError> =
-        homeRepository.addToFavourites(listItemEntity)
+    operator fun invoke(): FlowResult<List<ListItemEntity>, HomeError> =
+        homeRepository.getFavourites()
 }

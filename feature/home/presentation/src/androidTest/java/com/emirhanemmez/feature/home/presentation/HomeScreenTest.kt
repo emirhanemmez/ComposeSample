@@ -1,7 +1,6 @@
 package com.emirhanemmez.feature.home.presentation
 
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,9 +12,8 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
-import com.emirhanemmez.feature.home.presentation.model.HomeListItem
 import com.emirhanemmez.feature.home.presentation.state.HomeScreenUiEvent
-import com.emirhanemmez.feature.home.presentation.state.HomeScreenUiState
+import com.emirhanemmez.feature.home.presentation.state.ListState
 import org.junit.Rule
 import org.junit.Test
 import com.emirhanemmez.common.presentation.R as commonPresentationRes
@@ -30,10 +28,11 @@ class HomeScreenTest {
             HomeScreen(
                 onTextChanged = {},
                 onItemClick = {},
-                onItemLongClick = {},
-                homeScreenUiState = HomeScreenUiState.Content(listOf()),
-                homeScreenUiEvent = HomeScreenUiEvent.Idle,
-                snackbarHostState = SnackbarHostState()
+                listState = ListState.Content,
+                onFavouriteAction = {},
+                homeList = listOf(),
+                onPaginated = {},
+                canPaginate = false
             )
         }
         composeRule.onNodeWithTag(HomeTag.searchBox).assertExists()
@@ -47,10 +46,11 @@ class HomeScreenTest {
             HomeScreen(
                 onTextChanged = {},
                 onItemClick = {},
-                onItemLongClick = {},
-                homeScreenUiState = HomeScreenUiState.Error(errorMessage),
-                homeScreenUiEvent = HomeScreenUiEvent.Idle,
-                snackbarHostState = SnackbarHostState()
+                listState = ListState.Error(errorMessage),
+                onFavouriteAction = {},
+                homeList = listOf(),
+                onPaginated = {},
+                canPaginate = false
             )
         }
         composeRule.onNodeWithText(composeRule.activity.getString(commonPresentationRes.string.unknown_error))
@@ -66,19 +66,11 @@ class HomeScreenTest {
             HomeScreen(
                 onTextChanged = {},
                 onItemClick = {},
-                onItemLongClick = {
-                    homeScreenUiEvent = HomeScreenUiEvent.AddFavouriteSuccess("Added Successfully!")
-                },
-                homeScreenUiState = HomeScreenUiState.Content(
-                    listOf(
-                        HomeListItem(
-                            "kedi1",
-                            "image1"
-                        )
-                    )
-                ),
-                homeScreenUiEvent = homeScreenUiEvent,
-                snackbarHostState = SnackbarHostState()
+                listState = ListState.Content,
+                onFavouriteAction = {},
+                homeList = listOf(),
+                onPaginated = {},
+                canPaginate = false
             )
         }
 

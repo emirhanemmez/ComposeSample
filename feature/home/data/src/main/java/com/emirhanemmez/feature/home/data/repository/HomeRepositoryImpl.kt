@@ -6,6 +6,7 @@ import com.emirhanemmez.core.FlowResult
 import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.home.data.mapper.HomeErrorMapper
 import com.emirhanemmez.feature.home.data.mapper.toFavouriteItem
+import com.emirhanemmez.feature.home.data.mapper.toListItemEntity
 import com.emirhanemmez.feature.home.data.mapper.toListResponseEntity
 import com.emirhanemmez.feature.home.data.service.HomeService
 import com.emirhanemmez.feature.home.domain.entity.GetListResponseEntity
@@ -41,13 +42,33 @@ class HomeRepositoryImpl @Inject constructor(
             emit(Result.Error(HomeError.UnknownError))
         }.flowOn(ioDispatcher)
 
-    override fun addToFavourites(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError> =
+    override fun getFavourites(): FlowResult<List<ListItemEntity>, HomeError> =
+        flow<Result<List<ListItemEntity>, HomeError>> {
+            val response = homeService.getFavourites()
+            emit(Result.Success(response.map { it.toListItemEntity() }))
+        }.onStart {
+            emit(Result.Loading())
+        }.catch {
+            emit(Result.Error(HomeError.DeleteFavouriteError))
+        }
+
+    override fun addFavourite(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError> =
         flow<Result<Unit, HomeError>> {
-            homeService.addToFavourites(listItemEntity.toFavouriteItem())
+            homeService.addFavourite(listItemEntity.toFavouriteItem())
             emit(Result.Success(Unit))
         }.onStart {
             emit(Result.Loading())
         }.catch {
-            emit(Result.Error(HomeError.AddToFavouritesError))
+            emit(Result.Error(HomeError.AddFavouriteError))
+        }.flowOn(ioDispatcher)
+
+    override fun deleteFavourite(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError> =
+        flow<Result<Unit, HomeError>> {
+            homeService.deleteFavourite(listItemEntity.toFavouriteItem())
+            emit(Result.Success(Unit))
+        }.onStart {
+            emit(Result.Loading())
+        }.catch {
+            emit(Result.Error(HomeError.DeleteFavouriteError))
         }.flowOn(ioDispatcher)
 }

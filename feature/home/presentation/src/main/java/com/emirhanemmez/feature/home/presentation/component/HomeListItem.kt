@@ -1,17 +1,19 @@
 package com.emirhanemmez.feature.home.presentation.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -27,52 +29,26 @@ import coil.compose.rememberAsyncImagePainter
 import com.emirhanemmez.feature.home.presentation.model.HomeListItem
 
 @Composable
-fun List(
-    modifier: Modifier = Modifier,
-    listItems: List<HomeListItem>,
-    onItemClick: (HomeListItem) -> Unit,
-    onItemLongClick: (HomeListItem) -> Unit
-) {
-    LazyColumn(
-        modifier
-    ) {
-        items(listItems) { item ->
-            HomeListItem(
-                homeListItem = item,
-                onItemClick = onItemClick,
-                onItemLongClick = onItemLongClick
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
 fun HomeListItem(
     homeListItem: HomeListItem,
-    onItemClick: (HomeListItem) -> Unit,
-    onItemLongClick: (HomeListItem) -> Unit
+    onItemClick: (HomeListItem) -> Unit, onFavouriteAction: (HomeListItem) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .combinedClickable(
-                onClick = { onItemClick(homeListItem) },
-                onLongClick = { onItemLongClick(homeListItem) }
-            )
-            .background(Color.LightGray)
+            .clickable { onItemClick(homeListItem) }
             .padding(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(Color.LightGray)
                 .padding(12.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -87,6 +63,18 @@ fun HomeListItem(
                 text = homeListItem.name,
                 style = MaterialTheme.typography.bodyMedium,
                 overflow = TextOverflow.Ellipsis
+            )
+            Image(
+                modifier = Modifier
+                    .width(40.dp)
+                    .height(40.dp)
+                    .clickable { onFavouriteAction.invoke(homeListItem) },
+                imageVector =
+                if (homeListItem.isFavourite)
+                    Icons.Filled.Favorite
+                else
+                    Icons.Default.FavoriteBorder,
+                contentDescription = null
             )
         }
     }

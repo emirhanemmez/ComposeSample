@@ -8,3 +8,9 @@ fun ListItemEntity.toFavouriteItem(): FavouriteItem =
         name = name,
         imageURL = imageURL
     )
+
+fun FavouriteItem.toListItemEntity(): ListItemEntity =
+    ListItemEntity(
+        name = name,
+        imageURL = imageURL
+    )

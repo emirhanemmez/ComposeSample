@@ -1,88 +1,146 @@
 package com.emirhanemmez.feature.home.presentation
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eemmez.localization.LocalizationManager
 import com.emirhanemmez.core.Result
-import com.emirhanemmez.feature.home.domain.usecase.AddToFavouritesUseCase
+import com.emirhanemmez.feature.home.domain.entity.GetListResponseEntity
+import com.emirhanemmez.feature.home.domain.entity.HomeError
+import com.emirhanemmez.feature.home.domain.usecase.AddFavouriteUseCase
+import com.emirhanemmez.feature.home.domain.usecase.DeleteFavouriteUseCase
+import com.emirhanemmez.feature.home.domain.usecase.GetFavouritesUseCase
 import com.emirhanemmez.feature.home.domain.usecase.GetListUseCase
 import com.emirhanemmez.feature.home.presentation.mapper.ErrorMessageMapper
 import com.emirhanemmez.feature.home.presentation.mapper.toHomeListItem
 import com.emirhanemmez.feature.home.presentation.mapper.toListItemEntity
 import com.emirhanemmez.feature.home.presentation.model.HomeListItem
-import com.emirhanemmez.feature.home.presentation.state.HomeScreenUiEvent
-import com.emirhanemmez.feature.home.presentation.state.HomeScreenUiState
+import com.emirhanemmez.feature.home.presentation.state.ListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getListUseCase: GetListUseCase,
-    private val addToFavouritesUseCase: AddToFavouritesUseCase,
-    private val errorMessageMapper: ErrorMessageMapper,
-    private val localizationManager: LocalizationManager
+    private val getFavouritesUseCase: GetFavouritesUseCase,
+    private val addFavouriteUseCase: AddFavouriteUseCase,
+    private val deleteFavouriteUseCase: DeleteFavouriteUseCase,
+    private val errorMessageMapper: ErrorMessageMapper
 ) : ViewModel() {
-    private val _homeScreenUiState = MutableStateFlow<HomeScreenUiState>(HomeScreenUiState.Loading)
-    val homeScreenUiState: StateFlow<HomeScreenUiState> = _homeScreenUiState
+    private val _listState = MutableStateFlow<ListState>(ListState.Loading)
+    val listState: StateFlow<ListState> = _listState
 
-    private val _homeScreenUiEvent = MutableStateFlow<HomeScreenUiEvent>(HomeScreenUiEvent.Idle)
-    val homeScreenUiEvent: StateFlow<HomeScreenUiEvent> = _homeScreenUiEvent
+    private val _homeList = mutableStateListOf<HomeListItem>()
+    val homeList: List<HomeListItem> = _homeList
+
+    private var pageNumber by mutableIntStateOf(0)
+
+    private val _canPaginateState = MutableStateFlow(true)
+    val canPaginateState: StateFlow<Boolean> = _canPaginateState
 
     init {
-        getList(0, "")
+        getList()
     }
 
-    fun getList(pageNumber: Int, search: String) {
+    fun getList(isPagination: Boolean = false, search: String = "") {
         viewModelScope.launch {
-            getListUseCase.invoke(pageNumber, search)
-                .collect { result ->
-                    when (result) {
-                        is Result.Success -> {
-                            result.data?.let { response ->
-                                _homeScreenUiState.value =
-                                    HomeScreenUiState.Content(list = response.list.map { it.toHomeListItem() })
-                            }
-                        }
+            if (isPagination && _canPaginateState.value) {
+                pageNumber++
+            } else {
+                pageNumber = 0
+            }
 
-                        is Result.Loading -> {
-                            _homeScreenUiState.value = HomeScreenUiState.Loading
-                        }
-
-                        is Result.Error -> {
-                            _homeScreenUiState.value = HomeScreenUiState.Error(
-                                errorMessage = errorMessageMapper.getErrorMessage(result.error)
-                            )
-                        }
+            if (_canPaginateState.value) {
+                getListUseCase.invoke(pageNumber, search)
+                    .onCompletion {
+                        getFavourites()
+                    }.collect { result ->
+                        _listState.value = ListState.Content
+                        handleListResult(isPagination, result)
                     }
-                }
+            }
         }
     }
 
-    fun addToFavourites(homeListItem: HomeListItem) {
+    private fun getFavourites() {
         viewModelScope.launch {
-            addToFavouritesUseCase.invoke(homeListItem.toListItemEntity())
-                .collect { result ->
-                    when (result) {
-                        is Result.Success -> {
-                            _homeScreenUiEvent.value = HomeScreenUiEvent.AddFavouriteSuccess(
-                                localizationManager.getString(R.string.add_favourite_success)
-                            )
-                        }
-
-                        is Result.Loading -> {
-                            _homeScreenUiEvent.value = HomeScreenUiEvent.Loading
-                        }
-
-                        is Result.Error -> {
-                            _homeScreenUiEvent.value = HomeScreenUiEvent.Error(
-                                errorMessage = errorMessageMapper.getErrorMessage(result.error)
-                            )
+            getFavouritesUseCase.invoke().collect { result ->
+                when (result) {
+                    is Result.Success -> {
+                        _homeList.forEachIndexed { index, homeListItem ->
+                            if (result.data?.contains(homeListItem.toListItemEntity()) == true) {
+                                _homeList[index].isFavourite = true
+                            }
                         }
                     }
+
+                    else -> Unit
                 }
+            }
+        }
+    }
+
+    fun favouriteAction(homeListItem: HomeListItem) {
+        viewModelScope.launch {
+            if (homeListItem.isFavourite) {
+                deleteFavouriteUseCase.invoke(homeListItem.toListItemEntity()).collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            _homeList[_homeList.indexOf(homeListItem)].isFavourite = false
+                        }
+
+                        else -> Unit
+                    }
+                }
+            } else {
+                addFavouriteUseCase.invoke(homeListItem.toListItemEntity()).collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            _homeList[_homeList.indexOf(homeListItem)].isFavourite = true
+                        }
+
+                        else -> Unit
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleListResult(
+        isPagination: Boolean, result: Result<GetListResponseEntity, HomeError>
+    ) {
+        when (result) {
+            is Result.Success -> {
+                result.data?.let { response ->
+                    if (!isPagination) {
+                        _homeList.clear()
+                    }
+                    _homeList.addAll(response.list.map { it.toHomeListItem() })
+
+                    val canPaginate = result.data?.nextPageAvailable ?: false
+                    _canPaginateState.value = canPaginate
+                }
+            }
+
+            is Result.Loading -> {
+                _listState.value = if (isPagination) {
+                    ListState.PaginationLoading
+                } else ListState.Loading
+            }
+
+            is Result.Error -> {
+                _listState.value = if (isPagination) {
+                    ListState.PaginationError(errorMessageMapper.getErrorMessage(result.error))
+                } else {
+                    ListState.Error(errorMessageMapper.getErrorMessage(result.error))
+                }
+            }
         }
     }
 }

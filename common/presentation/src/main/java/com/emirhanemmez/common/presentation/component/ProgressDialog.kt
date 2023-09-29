@@ -6,7 +6,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -20,17 +19,17 @@ fun ProgressDialog(
     modifier: Modifier = Modifier
 ) {
     val progressValue = 1f
-    val infiniteTransition = rememberInfiniteTransition()
+    val infiniteTransition = rememberInfiniteTransition(label = "transitionLabel")
 
     val progressAnimationValue by infiniteTransition.animateFloat(
         initialValue = 0.0f,
         targetValue = progressValue,
-        animationSpec = infiniteRepeatable(animation = tween(900))
+        animationSpec = infiniteRepeatable(animation = tween(900)), label = "animationLabel"
     )
 
     Box(
         modifier = modifier
-            .fillMaxSize()
+            .wrapContentSize(align = Center)
             .background(color = Color.Transparent),
         contentAlignment = Center
     ) {

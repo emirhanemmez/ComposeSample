@@ -2,5 +2,5 @@
 <resources>
     <string name="some_list_error">Some list error</string>
     <string name="add_favourite_error">Can not add to favourites</string>
-    <string name="add_favourite_success">Successfully added!</string>
+    <string name="delete_favourite_error">Can not delete favourite item</string>
 </resources>

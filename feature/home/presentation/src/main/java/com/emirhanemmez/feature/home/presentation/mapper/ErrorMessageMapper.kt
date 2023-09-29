@@ -10,8 +10,9 @@ class ErrorMessageMapper(
 ) {
     fun getErrorMessage(error: HomeError?): String =
         when (error) {
-            is HomeError.GetListError -> localizationManager.getString(R.string.some_list_error)
-            is HomeError.AddToFavouritesError -> localizationManager.getString(R.string.add_favourite_error)
+            HomeError.GetListError -> localizationManager.getString(R.string.some_list_error)
+            HomeError.AddFavouriteError -> localizationManager.getString(R.string.add_favourite_error)
+            HomeError.DeleteFavouriteError -> localizationManager.getString(R.string.delete_favourite_error)
             else -> localizationManager.getString(commonResources.string.unknown_error)
         }
 

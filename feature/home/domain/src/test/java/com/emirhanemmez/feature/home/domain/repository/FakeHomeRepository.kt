@@ -4,9 +4,6 @@ import com.emirhanemmez.core.Result
 import com.emirhanemmez.feature.home.domain.entity.GetListResponseEntity
 import com.emirhanemmez.feature.home.domain.entity.HomeError
 import com.emirhanemmez.feature.home.domain.entity.ListItemEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
 
 class FakeHomeRepository : HomeRepository {
     private val listData = listOf(
@@ -38,7 +35,7 @@ class FakeHomeRepository : HomeRepository {
             emit(Result.Loading())
         }
 
-    override fun addToFavourites(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError>> =
+    override fun addFavourite(listItemEntity: ListItemEntity): FlowResult<Unit, HomeError>> =
         FlowResult<Unit, HomeError>> {
             emit(Result.Success(Unit))
         }.onStart {

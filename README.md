@@ -2,12 +2,12 @@
 Multi Module Clean Architecture Compose sample app.
 
 Technologies:
-- Android Studio Iguana 2023.2.1 Canary 1
+- Android Studio Iguana 2023.2.1 Canary 6
 - Multi Module Architecture
 - Jetpack Compose
 - K2 Compiler
-- Kotlin 1.9.0
-- AGP 8.3.0-alpha01
+- Kotlin 1.9.10
+- AGP 8.3.0-alpha06
 - Version Catalog
 - Ktor Client
 - Room

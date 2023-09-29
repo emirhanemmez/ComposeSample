@@ -8,20 +8,21 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-class AddToFavouritesUseCaseTest {
+class DeleteFavouriteUseCaseTest {
     private lateinit var fakeHomeRepository: FakeHomeRepository
-    private lateinit var addToFavouritesUseCase: AddToFavouritesUseCase
+    private lateinit var deleteFavouriteUseCase: DeleteFavouriteUseCase
 
     @Before
     fun setup() {
         fakeHomeRepository = FakeHomeRepository()
-        addToFavouritesUseCase = AddToFavouritesUseCase(fakeHomeRepository)
+        deleteFavouriteUseCase = DeleteFavouriteUseCase(fakeHomeRepository)
     }
 
     @Test
     fun `get loading result on start`() {
         runTest {
-            val result = addToFavouritesUseCase.invoke(ListItemEntity("kedi", "image1")).first()
+            val result =
+                deleteFavouriteUseCase.addFavourite(ListItemEntity("kedi", "image1")).first()
             assert(result is Result.Loading)
         }
     }

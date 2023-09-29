@@ -26,7 +26,15 @@ class HomeService @Inject constructor(
             parameter("search", search)
         }.body()
 
-    suspend fun addToFavourites(favouriteItem: FavouriteItem) {
+    suspend fun getFavourites(): List<FavouriteItem> {
+        return favouriteDatabase.favouriteItemDao().getAll()
+    }
+
+    suspend fun addFavourite(favouriteItem: FavouriteItem) {
         favouriteDatabase.favouriteItemDao().insert(favouriteItem)
+    }
+
+    suspend fun deleteFavourite(favouriteItem: FavouriteItem) {
+        favouriteDatabase.favouriteItemDao().delete(favouriteItem.name, favouriteItem.imageURL)
     }
 }

@@ -3,8 +3,6 @@ package module
 import com.emirhanemmez.convention.util.androidTestImplementation
 import com.emirhanemmez.convention.util.debugImplementation
 import com.emirhanemmez.convention.util.implementation
-import com.emirhanemmez.convention.util.kapt
-import com.emirhanemmez.convention.util.kaptAndroidTest
 import com.emirhanemmez.convention.util.library
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,8 +14,7 @@ class AppPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply {
                 apply("composesample.android.application.compose")
-                apply("com.google.dagger.hilt.android")
-                apply("org.jetbrains.kotlin.kapt")
+                apply("hilt")
             }
 
             dependencies {
@@ -41,21 +38,15 @@ class AppPlugin : Plugin<Project> {
                 implementation(library("ui.graphics"))
                 implementation(library("ui.tooling.preview"))
                 implementation(library("material3"))
-                implementation(library("hilt.android"))
-                kapt(library("hilt.compiler"))
                 androidTestImplementation(library("androidx.test.ext.junit"))
                 androidTestImplementation(library("espresso.core"))
                 androidTestImplementation(platform(library("compose.bom")))
                 androidTestImplementation(library("ui.test.junit4"))
                 androidTestImplementation(library("navigation.testing"))
-                androidTestImplementation(library("hilt.android"))
-                androidTestImplementation(library("hilt.testing"))
                 androidTestImplementation(library("hilt.navigation"))
-                kaptAndroidTest(library("hilt.compiler"))
                 debugImplementation(library("ui.tooling"))
                 debugImplementation(library("ui.test.manifest"))
             }
         }
     }
-
 }

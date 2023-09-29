@@ -7,16 +7,16 @@ import com.emirhanemmez.feature.home.domain.repository.HomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object HomeRepositoryModule {
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun provideHomeRepository(
         homeService: HomeService,
         @IoDispatcher ioDispatcher: CoroutineDispatcher
