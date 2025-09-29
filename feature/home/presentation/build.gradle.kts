@@ -1,5 +1,6 @@
 plugins {
     id("feature.home.presentation")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {

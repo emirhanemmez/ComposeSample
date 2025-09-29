@@ -4,6 +4,7 @@ import com.emirhanemmez.convention.util.androidTestImplementation
 import com.emirhanemmez.convention.util.debugImplementation
 import com.emirhanemmez.convention.util.implementation
 import com.emirhanemmez.convention.util.library
+import com.emirhanemmez.convention.util.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -21,6 +22,8 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             dependencies {
                 implementation(library("core.ktx"))
                 implementation(platform(library("compose.bom")))
+                implementation(library("androidx.material.icons.core"))
+                implementation(library("androidx.material.icons.extended"))
                 implementation(library("ui"))
                 implementation(library("ui.graphics"))
                 implementation(library("ui.tooling.preview"))
