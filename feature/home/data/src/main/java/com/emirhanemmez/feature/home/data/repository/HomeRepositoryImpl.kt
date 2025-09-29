@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
     private val homeService: HomeService,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : HomeRepository {
     override fun getList(
         pageNumber: Int?,

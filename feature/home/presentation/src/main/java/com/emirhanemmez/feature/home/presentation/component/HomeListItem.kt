@@ -27,7 +27,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.emirhanemmez.feature.home.presentation.model.HomeListItem
-
 @Composable
 fun HomeListItem(
     homeListItem: HomeListItem,

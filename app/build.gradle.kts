@@ -1,5 +1,6 @@
 plugins {
     id("app")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {

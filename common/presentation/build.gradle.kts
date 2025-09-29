@@ -1,5 +1,6 @@
 plugins {
     id("common.presentation")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {

@@ -1,5 +1,6 @@
 plugins {
     id("navigation")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
